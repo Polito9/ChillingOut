@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles4.css">
+  <style>
+    .buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 1px;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      margin: 0 5px;
+      padding: 10px 20px;
+      background-color: #3b189b;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .button:hover {
+      background-color: #333;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 95vh;
+    }
+
+    .slider {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      width: calc(100% * 3);
+      transition: transform 0.5s ease;
+    }
+
+    .slide {
+      width: 100%;
+    }
+
+    .slide img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    .labelSlider {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-color: #ddd;
+      border-radius: 50%;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .labelSlider:hover {
+      background-color: #ccc;
+    }
+
+    input[type="radio"]:checked+label {
+      background-color: #555;
+      color: #fff;
+    }
+
+    #slide1:checked~.slides {
+      transform: translateX(0%);
+    }
+
+    #slide2:checked~.slides {
+      transform: translateX(calc(-100% / 3));
+    }
+
+    #slide3:checked~.slides {
+      transform: translateX(calc(-100% * 2 / 3));
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <div>
+    <header clas="header">
+      <div class="container">
+        <div class="btn-menu">
+          <label for="btn-menu">☰</label>
+        </div>
+        <div class="logo">
+          <h1>ChillingOut</h1>
+        </div>
+        <nav class="menu">
+          <a href="/">Inicio</a>
+          <a href="">Nosotros</a>
+          <a href="">Contacto</a>
+          <a href="#">Bienvenido</a>
+        </nav>
+      </div>
+    </header>
+    <div class="capa"></div>
+    <input type="checkbox" id="btn-menu" />
+    <div class="container-menu">
+      <div class="cont-menu">
+        <nav>
+          <a href="register.html">Registro</a>
+          <a href="login.html">Inicio de sesion</a>
+          <a href="music.html">Música</a>
+          <a href="chat.html">Chat</a>
+          <a href="advice.html">Consejos de vida</a>
+          <a href="phrases.html">Frases</a>
+          <a href="games.html">Games</a>
+        </nav>
+        <label for="btn-menu">✖</label>
+      </div>
+    </div>
+    <div class="content">
+      <div class="slider">
+        <input type="radio" id="slide1" name="slider" checked>
+        <input type="radio" id="slide2" name="slider">
+        <input type="radio" id="slide3" name="slider">
+
+
+        <div class="slides">
+          <div class="slide" id="slide1">
+            <img src="images/post1.png" alt="Slide 1">
+          </div>
+          <div class="slide" id="slide2">
+            <img src="images/post2.png" alt="Slide 2">
+          </div>
+          <div class="slide" id="slide3">
+            <img src="images/post3.png" alt="Slide 3">
+          </div>
+        </div>
+          
+
+        <div class="controls">
+          <label class="labelSlider" for="slide1"></label>
+          <label class="labelSlider" for="slide2"></label>
+          <label class="labelSlider" for="slide3"></label>
+        </div>
+      </div>
+    </div>
+    <div class="buttons">
+      <a href="phrases.html" class="button">Éxito</a>
+      <a href="frasesAmor.html" class="button">Amor</a>
+      <a href="frasesAmistad.html" class="button">Amistad</a>
+    </div>
+  </div>
+
+  <script>
+    // Obtener referencias a los elementos relevantes del carrusel
+    var slides = document.querySelectorAll('.slide');
+    var slideRadioButtons = document.querySelectorAll('input[name="slider"]');
+    var currentSlideIndex = 0;
+
+    // Arreglo de nombres de imágenes aleatorias (actualiza con los nombres de tus imágenes)
+    var randomImages = [
+      'images/post1.png',
+      'images/post2.png',
+      'images/post3.png',
+      'images/post4.png',
+      'images/post5.png',
+      'images/post6.png',
+      'images/post7.png',
+      'images/post8.png',
+      'images/post9.png',
+      'images/post10.png',
+      'images/post11.png',
+      'images/post12.png',
+      'images/post13.png'
+    ];
+
+    // Función para cambiar al siguiente slide
+    function nextSlide() {
+      // Ocultar el slide actual
+      slides[currentSlideIndex].classList.remove('active');
+      slideRadioButtons[currentSlideIndex].checked = false;
+
+      // Calcular el índice del siguiente slide
+      currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+
+      // Mostrar el siguiente slide
+      slides[currentSlideIndex].classList.add('active');
+      slideRadioButtons[currentSlideIndex].checked = true;
+    }
+
+     // Cambiar la imagen del slide actual con una imagen aleatoria de tu carpeta "random-images"
+     function changeSlideImage() {
+      var currentSlideImage = slides[currentSlideIndex].querySelector('img');
+      var randomImageIndex;
+      do {
+        randomImageIndex = Math.floor(Math.random() * randomImages.length);
+      } while (randomImages[randomImageIndex] === currentSlideImage.src);
+      var imageUrl = randomImages[randomImageIndex];
+      currentSlideImage.src = imageUrl;
+    }
+
+
+    // Cambiar automáticamente el slide cada día (86400000 ms = 24 horas)
+    setInterval(function () {
+      nextSlide();
+      changeSlideImage();
+    }, 60000);
+
+    // Obtener referencias a los botones adicionales
+  var successButton = document.querySelector('.button[href="phrases.html"]');
+  var loveButton = document.querySelector('.button[href="frasesAmor.html"]');
+  var friendshipButton = document.querySelector('.button[href="amistad.html"]');
+
+    // Agregar los manejadores de eventos para redirigir a las páginas correspondientes
+  successButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    window.location.href = "phrases.html";
+    });
+
+  loveButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    window.location.href = "frasesAmor.html";
+    });
+
+  friendshipButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    window.location.href = "frasesAmistad.html";
+    });
+  </script>
+</body>
+
+</html>
