@@ -6,12 +6,33 @@
   <title>Document</title>
   <link rel="stylesheet" href="styles2.css">
   <style>
+    .buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 1px;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      margin: 0 5px;
+      padding: 10px 20px;
+      background-color: #855b0d;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .button:hover {
+      background-color: #333;
+    }
+
     .content {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      height: 95vh;
     }
 
     .slider {
@@ -69,6 +90,7 @@
     #slide3:checked~.slides {
       transform: translateX(calc(-100% * 2 / 3));
     }
+
 
   </style>
 </head>
@@ -134,7 +156,13 @@
         </div>
       </div>
     </div>
+    <div class="buttons">
+      <a href="phrases.html" class="button">Éxito</a>
+      <a href="amor.html" class="button">Amor</a>
+      <a href="amistad.html" class="button">Amistad</a>
+    </div>
   </div>
+
   <script>
     // Obtener referencias a los elementos relevantes del carrusel
     var slides = document.querySelectorAll('.slide');
@@ -172,10 +200,13 @@
       slideRadioButtons[currentSlideIndex].checked = true;
     }
 
-    // Cambiar la imagen del slide actual con una imagen aleatoria de tu carpeta "random-images"
-    function changeSlideImage() {
+     // Cambiar la imagen del slide actual con una imagen aleatoria de tu carpeta "random-images"
+     function changeSlideImage() {
       var currentSlideImage = slides[currentSlideIndex].querySelector('img');
-      var randomImageIndex = Math.floor(Math.random() * randomImages.length);
+      var randomImageIndex;
+      do {
+        randomImageIndex = Math.floor(Math.random() * randomImages.length);
+      } while (randomImages[randomImageIndex] === currentSlideImage.src);
       var imageUrl = randomImages[randomImageIndex];
       currentSlideImage.src = imageUrl;
     }
@@ -186,6 +217,27 @@
       nextSlide();
       changeSlideImage();
     }, 60000);
+
+    // Obtener referencias a los botones adicionales
+  var successButton = document.querySelector('.button[href="phrases.html"]');
+  var loveButton = document.querySelector('.button[href="amor.html"]');
+  var friendshipButton = document.querySelector('.button[href="amistad.html"]');
+
+    // Agregar los manejadores de eventos para redirigir a las páginas correspondientes
+  successButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    window.location.href = "phrases.html";
+    });
+
+  loveButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    window.location.href = "frasesAmor.html";
+    });
+
+  friendshipButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    window.location.href = "frasesAmistad.html";
+    });
   </script>
 </body>
 
