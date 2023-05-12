@@ -32,28 +32,39 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 95vh;
+      min-height: 100vh;
+      position: relative; /* Añadir posición relativa al contenedor principal */
+      z-index: 1;
     }
 
     .slider {
       position: relative;
       overflow: hidden;
+      width: 100%;
+      max-width: 800px;
+      z-index: 0;
     }
 
     .slides {
       display: flex;
-      width: calc(100% * 3);
+      width: 300%;
       transition: transform 0.5s ease;
     }
 
     .slide {
-      width: 100%;
+      width: 33.333%;
     }
 
     .slide img {
       display: block;
       width: 100%;
       height: auto;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
     }
 
     input[type="radio"] {
@@ -91,6 +102,61 @@
       transform: translateX(calc(-100% * 2 / 3));
     }
 
+    @media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .content {
+    padding: 10px;
+  }
+
+  .slider {
+    max-width: 100%;
+  }
+
+  .slides {
+    width: 200%;
+  }
+
+  .slide {
+    width: 50%;
+  }
+}
+.note-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#note-input {
+  width: 300px;
+  height: 200px;
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#note-counter {
+  font-size: 14px;
+  color: #888;
+}
+
+#note-submit {
+  padding: 10px 20px;
+  background-color: #855b0d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#note-submit:hover {
+  background-color: #333;
+}
 
   </style>
 </head>
@@ -161,10 +227,16 @@
       <a href="frasesAmor.html" class="button">Amor</a>
       <a href="frasesAmistad.html" class="button">Amistad</a>
     </div>
-    
+    <div class="note-container">
+      <textarea id="note-input" maxlength="3000" placeholder="Escribe una nota..."></textarea>
+      <span id="note-counter">0/3000</span>
+      <button id="note-submit">Guardar Nota</button>
+    </div>
+
   </div>
 
   <script>
+    
     // Obtener referencias a los elementos relevantes del carrusel
     var slides = document.querySelectorAll('.slide');
     var slideRadioButtons = document.querySelectorAll('input[name="slider"]');
@@ -202,21 +274,23 @@
     }
 
      // Cambiar la imagen del slide actual con una imagen aleatoria de tu carpeta "random-images"
-     function changeSlideImage() {
-      var currentSlideImage = slides[currentSlideIndex].querySelector('img');
-      var randomImageIndex;
-      do {
-        randomImageIndex = Math.floor(Math.random() * randomImages.length);
-      } while (randomImages[randomImageIndex] === currentSlideImage.src);
-      var imageUrl = randomImages[randomImageIndex];
-      currentSlideImage.src = imageUrl;
-    }
+     function changeSlideImages() {
+  for (var i = 0; i < slides.length; i++) {
+    var currentSlideImage = slides[i].querySelector('img');
+    var randomImageIndex;
+    do {
+      randomImageIndex = Math.floor(Math.random() * randomImages.length);
+    } while (randomImages[randomImageIndex] === currentSlideImage.src);
+    var imageUrl = randomImages[randomImageIndex];
+    currentSlideImage.src = imageUrl;
+  }
+}
 
 
     // Cambiar automáticamente el slide cada día (86400000 ms = 24 horas)
     setInterval(function () {
       nextSlide();
-      changeSlideImage();
+      changeSlideImages();
     }, 60000);
 
     // Obtener referencias a los botones adicionales
@@ -239,6 +313,67 @@
     event.preventDefault();
     window.location.href = "frasesAmistad.html";
     });
+
+    // Obtener referencias a los elementos relevantes
+var noteInput = document.getElementById('note-input');
+var noteCounter = document.getElementById('note-counter');
+var noteSubmit = document.getElementById('note-submit');
+var noteList = document.createElement('ul');
+noteList.classList.add('note-list');
+document.body.appendChild(noteList);
+
+// Contador de caracteres de la nota
+noteInput.addEventListener('input', function () {
+      var characterCount = noteInput.value.length;
+      noteCounter.textContent = characterCount + '/3000';
+    });
+
+    // Agregar una nueva nota
+    noteSubmit.addEventListener('click', function () {
+      var noteText = noteInput.value.trim();
+      if (noteText !== '') {
+        var noteItem = document.createElement('li');
+        noteItem.textContent = noteText;
+
+        var deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Borrar';
+        deleteButton.addEventListener('click', function () {
+          noteList.removeChild(noteItem);
+        });
+
+        noteItem.appendChild(deleteButton);
+        noteList.appendChild(noteItem);
+
+        noteInput.value = '';
+        noteCounter.textContent = '0/3000';
+      }
+    });
+// Agregar evento al botón de guardar nota
+noteSubmit.addEventListener('click', function() {
+  var noteText = noteInput.value;
+  if (noteText.trim() !== '') {
+    var noteItem = document.createElement('li');
+    noteItem.textContent = noteText;
+    noteList.appendChild(noteItem);
+    noteInput.value = '';
+    noteCounter.textContent = '0/3000';
+  }
+});
+
+// Cargar notas previamente guardadas
+window.addEventListener('DOMContentLoaded', function() {
+  var savedNotes = localStorage.getItem('notes');
+  if (savedNotes) {
+    noteList.innerHTML = savedNotes;
+  }
+});
+
+// Guardar notas en el almacenamiento local
+window.addEventListener('beforeunload', function() {
+  localStorage.setItem('notes', noteList.innerHTML);
+});
+
+
   </script>
 </body>
 
