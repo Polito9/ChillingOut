@@ -32,7 +32,7 @@
             Statement sta = null;
             try{
                 Class.forName("com.mysql.jdbc.Driver");
-                conx = DriverManager.getConnection("jdbc:mysql://localhost:3306/Soporte?autoReconnect=true&useSSL=false","root", "n0m3l0");
+                conx = DriverManager.getConnection("jdbc:mysql://localhost:3306/Relaxing?autoReconnect=true&useSSL=false","root", "n0m3l0");
                 sta = conx.createStatement();
             }catch(SQLException error){
                 out.print(error.toString());
