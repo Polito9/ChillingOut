@@ -13,16 +13,15 @@
             <div>
                 <h2>Ventana Emergente</h2>
                 <p>Esta es una ventana emergente amigable.</p>
-                <button onclick="cerrarVentana('asistente.jsp')">Cerrar</button>
+                <button onclick="cerrarVentana('foro.jsp')">Cerrar</button>
             </div>
         </div>
         <%
             HttpSession sesion = request.getSession();
             String active_username = String.valueOf(sesion.getAttribute("user"));
             request.setCharacterEncoding("UTF-8");
-            String descripcion = request.getParameter("descripcion");
-            String usuarioRepor = request.getParameter("usuarioRepor");
-            String idAsistente = request.getParameter("idAsistente");
+            String titulo = request.getParameter("titulo");
+            String contenido = request.getParameter("contenido");
             String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
             String[] parts = dateTime.split("T");
             String time = parts[1];
@@ -39,17 +38,8 @@
                 out.print(error.toString());
             }
             try{
-                boolean existe = false;  
-                resul = sta.executeQuery("select * from Actores where username like '"+usuarioRepor+"';");
-                
-                existe = (resul.next());
-                resul.close();
-                if(existe){
-                    sta.executeUpdate("INSERT INTO `Reportes` (`id`, `fecha_reportado`, `hora_reportado`, `descripcion`, `usuario_reporto`, `assistant_username`, `gerente_soporte_asignado`, `gerente_mantenimiento_asignado`, `ingeniero_asignado_mantenimiento`, `ingeniero_asignado_soporte`, `fecha_asignacion`, `hora_asignacion`, `estado`, `retroalimentacion`, `fecha_terminado`, `hora_terminado`) VALUES (default, '"+date+"', '"+time+"', '"+descripcion+"', '"+usuarioRepor+"', '"+active_username+"', 'Sin asignar', 'Sin asignar', 'Sin asignar', 'Sin asignar', '1900-01-01', '00:00:00', 'Abierto', 'Sin asignar', '1900-01-01', '00:00:00');") ;
-                    out.println("<script>mostrarVentana('Datos guardados', 'Reporte dado de alta')</script>");
-                }else{
-                    out.println("<script>mostrarVentana('Advertencia', 'No existe el usuario')</script>");
-                }
+                sta.executeUpdate("INSERT INTO `publicaciones` (`id_publicacion`, `titulo`, `contenido`, `fecha_public`, `hora_public`, `id_usuario`) VALUES (default, '"+titulo+"', '"+contenido+"', '"+date+"', '"+time+"', '"+active_username+"');");
+                out.println("<script>mostrarVentana('Publicación registrada', 'Ya puede visualizar su publicación')</script>");
                 conx.close();
                 sta.close();
             }catch(SQLException error){
