@@ -33,7 +33,7 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      position: relative; /* Añadir posición relativa al contenedor principal */
+      position: relative;
       z-index: 1;
     }
 
@@ -103,60 +103,26 @@
     }
 
     @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-  .content {
-    padding: 10px;
-  }
+      .container {
+        flex-direction: column;
+      }
 
-  .slider {
-    max-width: 100%;
-  }
+      .content {
+        padding: 10px;
+      }
 
-  .slides {
-    width: 200%;
-  }
+      .slider {
+        max-width: 100%;
+      }
 
-  .slide {
-    width: 50%;
-  }
-}
-.note-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-}
+      .slides {
+        width: 200%;
+      }
 
-#note-input {
-  width: 300px;
-  height: 200px;
-  resize: none;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-#note-counter {
-  font-size: 14px;
-  color: #888;
-}
-
-#note-submit {
-  padding: 10px 20px;
-  background-color: #855b0d;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#note-submit:hover {
-  background-color: #333;
-}
+      .slide {
+        width: 50%;
+      }
+    }
 
   </style>
 </head>
@@ -227,14 +193,11 @@
       <a href="frasesAmor.html" class="button">Amor</a>
       <a href="frasesAmistad.html" class="button">Amistad</a>
     </div>
-    <div class="note-container">
-      <textarea id="note-input" maxlength="3000" placeholder="Escribe una nota..."></textarea>
-      <span id="note-counter">0/3000</span>
-      <button id="note-submit">Guardar Nota</button>
-    </div>
+    
 
   </div>
-
+  <div><a href="notas.html" class="button">Ir a Notas</a></div>
+  
   <script>
     
     // Obtener referencias a los elementos relevantes del carrusel
@@ -314,67 +277,10 @@
     window.location.href = "frasesAmistad.html";
     });
 
-    // Obtener referencias a los elementos relevantes
-var noteInput = document.getElementById('note-input');
-var noteCounter = document.getElementById('note-counter');
-var noteSubmit = document.getElementById('note-submit');
-var noteList = document.createElement('ul');
-noteList.classList.add('note-list');
-document.body.appendChild(noteList);
-
-// Contador de caracteres de la nota
-noteInput.addEventListener('input', function () {
-      var characterCount = noteInput.value.length;
-      noteCounter.textContent = characterCount + '/3000';
-    });
-
-    // Agregar una nueva nota
-    noteSubmit.addEventListener('click', function () {
-      var noteText = noteInput.value.trim();
-      if (noteText !== '') {
-        var noteItem = document.createElement('li');
-        noteItem.textContent = noteText;
-
-        var deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Borrar';
-        deleteButton.addEventListener('click', function () {
-          noteList.removeChild(noteItem);
-        });
-
-        noteItem.appendChild(deleteButton);
-        noteList.appendChild(noteItem);
-
-        noteInput.value = '';
-        noteCounter.textContent = '0/3000';
-      }
-    });
-// Agregar evento al botón de guardar nota
-noteSubmit.addEventListener('click', function() {
-  var noteText = noteInput.value;
-  if (noteText.trim() !== '') {
-    var noteItem = document.createElement('li');
-    noteItem.textContent = noteText;
-    noteList.appendChild(noteItem);
-    noteInput.value = '';
-    noteCounter.textContent = '0/3000';
-  }
-});
-
-// Cargar notas previamente guardadas
-window.addEventListener('DOMContentLoaded', function() {
-  var savedNotes = localStorage.getItem('notes');
-  if (savedNotes) {
-    noteList.innerHTML = savedNotes;
-  }
-});
-
-// Guardar notas en el almacenamiento local
-window.addEventListener('beforeunload', function() {
-  localStorage.setItem('notes', noteList.innerHTML);
-});
-
-
+    
   </script>
+
+
 </body>
 
 </html>
