@@ -1,0 +1,61 @@
+
+*{
+    padding: 0;
+    margin: 0;
+}
+    /* Set background color */
+    body {
+        background-color: #a692ba;
+    }
+
+    /* Style for the header container */
+    #header {
+      background-color: #6b5b95;
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Style for the login and register links */
+    #header a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 10px;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 8px 12px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect for the login and register links */
+#header a:hover {
+  background-color: white;
+  color: #6b5b95;
+}
+
+/* Style for the login and register links when active */
+#header a:active {
+  transform: translateY(2px);
+}
+
+    /* Style for the title and subtitle container */
+    #content {
+      
+      color: white;
+      padding: 50px;
+      text-align: center;
+    }
+
+    /* Style for the title */
+    h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    /* Style for the subtitle */
+    h2 {
+      font-size: 24px;
+      margin-top: 0;
+    }

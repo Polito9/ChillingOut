@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Music</title>
+    <link rel="stylesheet" href="styles2.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+            .buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 1px;
+        margin-bottom: 20px;
+        }
+
+        .button {
+        display: inline-block;
+        margin: 0 5px;
+        padding: 10px 20px;
+        background-color: #855b0d;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        }
+
+        .button:hover {
+        background-color: #333;
+        }
+        .content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+		}
+        h1 {
+            color: #6b5b95;
+            text-align: center;
+        }
+
+        button {
+            background-color: #6b5b95;
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #a692ba;
+            color: #6b5b95;
+        }
+
+        #song-list {
+            margin: 0 auto;
+            width: 50%;
+            text-align: center;
+            color: #6b5b95;
+            font-size: 1.2em;
+            margin-top: 50px;
+        }
+
+        .song {
+            padding: 10px;
+            border-bottom: 1px solid #6b5b95;
+            cursor: pointer;
+        }
+
+        .song:hover {
+            background-color: #6b5b95;
+            color: white;
+        }
+
+        .active {
+            background-color: #6b5b95;
+            color: white;
+        }
+        .slider {
+
+      width: 100%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+    }
+
+    .slider-input {
+      flex: 1;
+      -webkit-appearance: none;
+      background: #ddd;
+      height: 10px;
+      border-radius: 5px;
+      outline: none;
+      margin: 0 10px;
+    }
+
+    .slider-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #333;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .slider-value {
+      width: 50px;
+      text-align: center;
+    }
+    </style>
+</head>
+
+<body>
+    <div>
+        <header clas="header">
+            <div class="container">
+                <div class="btn-menu">
+                    <label for="btn-menu">☰</label>
+                </div>
+                <div class="logo">
+                    <h1>ChillingOut</h1>
+                </div>
+                <nav class="menu">
+                    <a href="/">Inicio</a>
+                    <a href="">Nosotros</a>
+                    <a href="">Contacto</a>
+                    <a href="#">Bienvenido</a>
+                </nav>
+            </div>
+        </header>
+        <div class="capa"></div>
+        <input type="checkbox" id="btn-menu" />
+        <div class="container-menu">
+            <div class="cont-menu">
+                <nav>
+                    <a href="register.html">Registro</a>
+                    <a href="login.html">Inicio de sesion</a>
+                    <a href="music.html">Música</a>
+                    <a href="chat.html">Chat</a>
+                    <a href="advice.html">Consejos de vida</a>
+                    <a href="phrases.html">Frases</a>
+                    <a href="games.html">Games</a>
+                </nav>
+                <label for="btn-menu">✖</label>
+            </div>
+        </div>
+        <div class="content">
+            <div class="buttons">
+                <a href="music.html" class="button">Crazy on you</a>
+                <a href="music2.html" class="button">X - Poor Girl</a>
+                <a href="music3.html" class="button">Come and Get Your Love</a>
+                <a href="music4.html" class="button">Since You Been Gone</a>
+              </div>
+              <video src="IM.mp4" autoplay controls b loop></video>
+        </div>
+        
+    </div>
+    <script>
+        let audio = document.getElementById("audio");
+        let audioSrc = document.getElementById("audio-src");
+        let playBtn = document.getElementById("play");
+        let pauseBtn = document.getElementById("pause");
+
+        function playSong(song) {
+            audioSrc.src = song;
+            audio.load();
+            play();
+        }
+
+        function play() {
+            audio.play();
+            playBtn.disabled = true;
+            pauseBtn.disabled = false;
+        }
+
+        function pause() {
+            audio.pause();
+            playBtn.disabled = false;
+            pauseBtn.disabled = true;
+        }
+    </script>
+</body>
+
+</html>

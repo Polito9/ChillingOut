@@ -1,0 +1,32 @@
+/*Para la ventanita */
+.ventana {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    z-index: 9999; /* Z-index alto para asegurar que esté por encima del contenido */
+  }
+  
+  .contenido {
+    background-color: #f0efca;
+    color: #333;
+    max-width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  /* Estilos para el botón de cerrar */
+  .contenido button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 3px;
+  }

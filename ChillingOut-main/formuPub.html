@@ -1,0 +1,52 @@
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Publicar</title>
+        <style>
+            .centrado {
+              text-align: center;
+            }
+          </style>
+        <link rel="stylesheet" href="styles2.css">
+    </head>
+    <body>
+        <script src="validacion.js"></script>
+        <div style="text-align: center;">
+            <h2>Hacer una publicación</h2>
+            <form id="publicacion" name="publicacion" method="post" action="publicar.jsp">
+                <div class="centrado">
+                    <label for="titulo"><b>Título de la publicación</b></label>
+                    <br>
+                    <textarea id="titulo" name="titulo" rows="1" cols="20" maxlength="30" resize="none" oninput="contadorCaracteres1()"></textarea>
+                    <p>Caracteres restantes: <span id="contador">30</span></p>
+                    <script>
+                        function contadorCaracteres1() {
+                          var contador = document.getElementById("contador");
+                          var texto = document.getElementById("titulo").value;
+                          var longitud = texto.length;
+                          contador.innerHTML = 30 - longitud;
+                        }
+                    </script>
+                </div>
+                <div class="centrado">
+                    <label for="contenido"><b>Contenido</b></label>
+                    <br>
+                    <textarea id="contenido" name="contenido" rows="5" cols="50" maxlength="500" resize="none" oninput="contadorCaracteres2()"></textarea>
+                    <p>Caracteres restantes: <span id="contador1">500</span></p>
+                    <script>
+                        function contadorCaracteres2() {
+                          var contador = document.getElementById("contador1");
+                          var texto = document.getElementById("contenido").value;
+                          var longitud = texto.length;
+                          contador.innerHTML = 500 - longitud;
+                        }
+                    </script>
+                </div>
+                <div>
+                    <input type="button" value="Publicar" name="Publicar" onclick="validar()"/>
+                </div>
+            </form>
+        </div> 
+    </body>
+</html>
