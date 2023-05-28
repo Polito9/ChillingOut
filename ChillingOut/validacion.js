@@ -1,13 +1,12 @@
 function validar(){
-    formulario = document.getElementById("publicación");
+    formulario = document.getElementById("publicacion");
     titulo = document.getElementById("titulo").value;
     contenido = document.getElementById("contenido").value;
-    valido = (descripcion === "" || usuarioRepor === "");
+    valido = (contenido === "");
     if (valido){
-        alert("Llena todos los campos para poder publicar");
+        alert("Necesitas escribir algo para poder publicar algo");
     } 
     else{
         formulario.submit();
     }
-
 }
