@@ -1,50 +1,131 @@
+
 <html>
     <head>
+        <meta charset="UTF-8">
         <title>Publicar</title>
         <style>
-            .centrado {
-              text-align: center;
-            }
+            body {
+        font-family: Arial, sans-serif;
+    }
+
+    h2 {
+        color: #d1d1d1;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .centrado {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: none;
+    }
+
+    p {
+        color: #f7bebe;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    input[type="button"] {
+        background-color: #ad47b2;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    input[type="button"]:hover {
+        background-color: #832e7f;
+    }
           </style>
         <link rel="stylesheet" href="styles2.css">
+        <script src="validacion.js"></script>
     </head>
     <body>
-        <script src="validacion.js"></script>
-        <div style="text-align: center;">
+        <header clas="header">
+            <div class="container">
+              <div class="btn-menu">
+                <label for="btn-menu">☰</label>
+              </div>
+              <div class="logo">
+                <h1>ChillingOut</h1>
+              </div>
+            </div>
+          </header>
+          <div class="capa"></div>
+          <input type="checkbox" id="btn-menu" />
+          <div class="container-menu">
+            <div class="cont-menu">
+                <nav>
+                    <a href="menu.html">Menú</a>
+                    <a href="music.html">Música</a>
+                    <a href="foro.jsp">Chat</a>
+                    <a href="phrases.html">Frases</a>
+                    <a href="games.html">Games</a>
+                  </nav>
+              <label for="btn-menu">✖</label>
+            </div>
+          </div>
+          <br><br><br><br>
+        
+        <div>
             <h2>Hacer una publicación</h2>
-            <form id="publicación" name="publicación" method="post" action="publicar.jsp">
+            <form id="publicacion" name="publicacion" method="post" action="publicar.jsp">
                 <div class="centrado">
                     <label for="titulo"><b>Título de la publicación</b></label>
                     <br>
                     <textarea id="titulo" name="titulo" rows="1" cols="20" maxlength="30" resize="none" oninput="contadorCaracteres1()"></textarea>
                     <p>Caracteres restantes: <span id="contador">30</span></p>
-                    <script>
-                        function contadorCaracteres1() {
-                          var contador = document.getElementById("contador");
-                          var texto = document.getElementById("titulo").value;
-                          var longitud = texto.length;
-                          contador.innerHTML = 30 - longitud;
-                        }
-                    </script>
+                    
                 </div>
                 <div class="centrado">
                     <label for="contenido"><b>Contenido</b></label>
                     <br>
                     <textarea id="contenido" name="contenido" rows="5" cols="50" maxlength="500" resize="none" oninput="contadorCaracteres2()"></textarea>
                     <p>Caracteres restantes: <span id="contador1">500</span></p>
-                    <script>
-                        function contadorCaracteres2() {
-                          var contador = document.getElementById("contador1");
-                          var texto = document.getElementById("contenido").value;
-                          var longitud = texto.length;
-                          contador.innerHTML = 500 - longitud;
-                        }
-                    </script>
+                    
                 </div>
                 <div>
                     <input type="button" value="Publicar" name="Publicar" onclick="validar()"/>
                 </div>
             </form>
         </div> 
+        <script>
+            function contadorCaracteres2() {
+              var contador = document.getElementById("contador1");
+              var texto = document.getElementById("contenido").value;
+              var longitud = texto.length;
+              contador.innerHTML = 500 - longitud;
+            }
+        </script>
+        <script>
+            function contadorCaracteres1() {
+              var contador = document.getElementById("contador");
+              var texto = document.getElementById("titulo").value;
+              var longitud = texto.length;
+              contador.innerHTML = 30 - longitud;
+            }
+        </script>
     </body>
 </html>
