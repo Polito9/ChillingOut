@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>Document</title>
   <link rel="stylesheet" href="styles3.css">
+  
   <style>
     .buttons {
       display: flex;
@@ -17,7 +18,7 @@
       display: inline-block;
       margin: 0 5px;
       padding: 10px 20px;
-      background-color: #8a1f6a;
+      background-color: #855b0d;
       color: #fff;
       text-decoration: none;
       border-radius: 5px;
@@ -32,28 +33,39 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 95vh;
+      min-height: 50vh;
+      position: relative;
+      z-index: 1;
     }
 
     .slider {
       position: relative;
       overflow: hidden;
+      width: 50%;
+      max-width: 800px;
+      z-index: 0;
     }
 
     .slides {
       display: flex;
-      width: calc(100% * 3);
+      width: 300%;
       transition: transform 0.5s ease;
     }
 
     .slide {
-      width: 100%;
+      width: 33.333%;
     }
 
     .slide img {
       display: block;
       width: 100%;
       height: auto;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
     }
 
     input[type="radio"] {
@@ -91,7 +103,27 @@
       transform: translateX(calc(-100% * 2 / 3));
     }
 
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
 
+      .content {
+        padding: 10px;
+      }
+
+      .slider {
+        max-width: 100%;
+      }
+
+      .slides {
+        width: 200%;
+      }
+
+      .slide {
+        width: 50%;
+      }
+    }
   </style>
 </head>
 
@@ -105,12 +137,6 @@
         <div class="logo">
           <h1>ChillingOut</h1>
         </div>
-        <nav class="menu">
-          <a href="/">Inicio</a>
-          <a href="">Nosotros</a>
-          <a href="">Contacto</a>
-          <a href="#">Bienvenido</a>
-        </nav>
       </div>
     </header>
     <div class="capa"></div>
@@ -118,11 +144,9 @@
     <div class="container-menu">
       <div class="cont-menu">
         <nav>
-          <a href="register.html">Registro</a>
-          <a href="login.html">Inicio de sesion</a>
+          <a href="menu.html">Menú</a>
           <a href="music.html">Música</a>
-          <a href="chat.html">Chat</a>
-          <a href="advice.html">Consejos de vida</a>
+          <a href="foro.jsp">Chat</a>
           <a href="phrases.html">Frases</a>
           <a href="games.html">Games</a>
         </nav>
@@ -135,20 +159,18 @@
         <input type="radio" id="slide2" name="slider">
         <input type="radio" id="slide3" name="slider">
 
-
+        <br><br><br>
         <div class="slides">
           <div class="slide" id="slide1">
-            <img src="imageslove/post1.png" alt="Slide 1">
+            <img src="imageslove/Post1.png" alt="Slide 1">
           </div>
           <div class="slide" id="slide2">
-            <img src="imageslove/post2.png" alt="Slide 2">
+            <img src="imageslove/Post2.png" alt="Slide 2">
           </div>
           <div class="slide" id="slide3">
-            <img src="imageslove/post3.png" alt="Slide 3">
+            <img src="imageslove/Post3.png" alt="Slide 3">
           </div>
         </div>
-          
-
         <div class="controls">
           <label class="labelSlider" for="slide1"></label>
           <label class="labelSlider" for="slide2"></label>
@@ -159,84 +181,9 @@
     <div class="buttons">
       <a href="phrases.html" class="button">Éxito</a>
       <a href="frasesAmor.html" class="button">Amor</a>
-      <a href="frasesAmistad.html" class="button">Amistad</a>
     </div>
   </div>
-
-  <script>
-    // Obtener referencias a los elementos relevantes del carrusel
-    var slides = document.querySelectorAll('.slide');
-    var slideRadioButtons = document.querySelectorAll('input[name="slider"]');
-    var currentSlideIndex = 0;
-
-    // Arreglo de nombres de imágenes aleatorias (actualiza con los nombres de tus imágenes)
-    var randomImages = [
-      'imageslove/post1.png',
-      'imageslove/post2.png',
-      'imageslove/post3.png',
-      'imageslove/post4.png',
-      'imageslove/post5.png',
-      'imageslove/post6.png',
-      'imageslove/post7.png',
-      'imageslove/post8.png',
-      'imageslove/post9.png',
-      'imageslove/post10.png',
-      'imageslove/post11.png'
-    ];
-
-    // Función para cambiar al siguiente slide
-    function nextSlide() {
-      // Ocultar el slide actual
-      slides[currentSlideIndex].classList.remove('active');
-      slideRadioButtons[currentSlideIndex].checked = false;
-
-      // Calcular el índice del siguiente slide
-      currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-
-      // Mostrar el siguiente slide
-      slides[currentSlideIndex].classList.add('active');
-      slideRadioButtons[currentSlideIndex].checked = true;
-    }
-
-     // Cambiar la imagen del slide actual con una imagen aleatoria de tu carpeta "random-images"
-     function changeSlideImage() {
-      var currentSlideImage = slides[currentSlideIndex].querySelector('img');
-      var randomImageIndex;
-      do {
-        randomImageIndex = Math.floor(Math.random() * randomImages.length);
-      } while (randomImages[randomImageIndex] === currentSlideImage.src);
-      var imageUrl = randomImages[randomImageIndex];
-      currentSlideImage.src = imageUrl;
-    }
-
-
-    // Cambiar automáticamente el slide cada día (86400000 ms = 24 horas)
-    setInterval(function () {
-      nextSlide();
-      changeSlideImage();
-    }, 60000);
-
-    // Obtener referencias a los botones adicionales
-  var successButton = document.querySelector('.button[href="phrases.html"]');
-  var loveButton = document.querySelector('.button[href="frasesAmor.html"]');
-  var friendshipButton = document.querySelector('.button[href="frasesAmistad.html"]');
-
-    // Agregar los manejadores de eventos para redirigir a las páginas correspondientes
-  successButton.addEventListener('click', function(event) {
-    event.preventDefault();
-    window.location.href = "phrases.html";
-    });
-
-  loveButton.addEventListener('click', function(event) {
-    event.preventDefault();
-    window.location.href = "frasesAmor.html";
-    });
-
-  friendshipButton.addEventListener('click', function(event) {
-    event.preventDefault();
-    window.location.href = "frasesAmistad.html";
-    });
-  </script>
+  <div><a href="notas.jsp" class="button">Ir a Notas</a></div>
 </body>
-
+<script src="imagenes.js"></script>
 </html>
