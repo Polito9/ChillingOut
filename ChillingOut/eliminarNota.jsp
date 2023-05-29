@@ -12,30 +12,30 @@
 </head>
 <body>
 <%
-int usuarioId = Integer.parseInt(request.getParameter("usuarioId"));
-String nota = request.getParameter("nota");
+HttpSession sesion = request.getSession();
+String usuarioId = sesion.getAttribute("user").toString();
+String nota = request.getParameter("notaId");
 
 Connection conx = null;
 Statement sta = null;
 
 try {
     Class.forName("com.mysql.jdbc.Driver");
-    conx = DriverManager.getConnection("jdbc:mysql://localhost:3306/relaxing?useUnicode=true&characterEncoding=UTF-8","root", "n0m3l0");
+    conx = DriverManager.getConnection("jdbc:mysql://localhost:3306/ChillingOut?useUnicode=true&characterEncoding=UTF-8","root", "n0m3l0");
     sta = conx.createStatement();
 
     // Eliminar la nota de la tabla 'notas'
-    String sql = "DELETE FROM notas WHERE id_usuario = ? AND nota = ?";
+    String sql = "DELETE FROM notas WHERE username = ? AND id_nota = ?";
     PreparedStatement statement = conx.prepareStatement(sql);
-    statement.setInt(1, usuarioId);
+    statement.setString(1, usuarioId);
     statement.setString(2, nota);
     statement.executeUpdate();
-
     // Cerrar la conexión y el statement
     statement.close();
     conx.close();
 
     // Redireccionar de regreso a notas
-    response.sendRedirect("notas.html?usuarioId=" + usuarioId);
+    response.sendRedirect("notas.jsp?usuarioId=" + usuarioId);
 } catch (SQLException error) {
     out.print(error.toString());
 } catch (ClassNotFoundException error) {
